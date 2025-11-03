@@ -29,6 +29,9 @@ def save_pipeline(*, pipeline_to_persist: Pipeline) -> None:
     # Prepare versioned save file name
     save_file_name = f"{config.app_config.pipeline_save_file}{_version}.pkl"
     save_path = TRAINED_MODEL_DIR / save_file_name
+    
+    if not TRAINED_MODEL_DIR.exists():
+        TRAINED_MODEL_DIR.mkdir(exist_ok=True)
 
     remove_old_pipelines(files_to_keep=[save_file_name])
     joblib.dump(pipeline_to_persist, save_path)
@@ -50,6 +53,7 @@ def remove_old_pipelines(*, files_to_keep: t.List[str]) -> None:
     version to be imported and used by other applications.
     """
     do_not_delete = files_to_keep + ["__init__.py"]
-    for model_file in TRAINED_MODEL_DIR.iterdir():
-        if model_file.name not in do_not_delete:
-            model_file.unlink()
+    if TRAINED_MODEL_DIR.exists():
+        for model_file in TRAINED_MODEL_DIR.iterdir():
+            if model_file.name not in do_not_delete:
+                model_file.unlink()

@@ -24,7 +24,7 @@ def make_prediction(
 
     if not errors:
         predictions = _abandono_pipe.predict(
-            X=validated_data[config.model_config.features]
+            X=validated_data[config.local_model_config.features]
         )
         results = {
             "predictions": [pred for pred in predictions], 
