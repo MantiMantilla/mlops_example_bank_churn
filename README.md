@@ -8,7 +8,7 @@ To prepare for deployment, follow these steps:
 
 1. Clone this project.
 
-```
+```bash
 git clone https://github.com/MantiMantilla/mlops_example_bank_churn
 
 # or
@@ -19,7 +19,7 @@ cd mlops_example_bank_churn
 
 2. Make sure `tox` and `build` are installed.
 
-```
+```bash
 python -m venv venv
 source ./venv/bin/activate
 pip install tox build
@@ -50,7 +50,7 @@ from model.predict import make_prediction
 
 sample_input_data = pd.read_csv("./model/datasets/bankchurn_test.csv")
 result = make_prediction(input_data=sample_input_data)
-print(result)exist_ok
+print(result)
 ```
 
 ## Credits
